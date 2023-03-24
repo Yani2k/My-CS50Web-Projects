@@ -7,9 +7,11 @@
 {% block body %}
     <h1>All Pages</h1>
 
-    <ul>
+    <ul>  
         {% for entry in entries %}
-            <li><a href="{% url 'entry' title=entry %}">{{ entry }}</li>
+          <li><a href="{% url 'entry' title=entry %}">{{ entry }}</li>
+        {% empty %}
+          <h2>No matches for your search.</h2>
         {% endfor %}
     </ul>
 
