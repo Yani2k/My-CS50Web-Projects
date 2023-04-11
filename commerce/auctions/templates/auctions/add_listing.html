@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <form action="{% url 'add' %}" method="post">
+    {% csrf_token %}
+    <input type="number" min="0" name="min_bid" placeholder="Minimal bid allowed" required>
+    <input type="date" name="close_date" placeholder="Closing Date" required>
+    <input type="url" name="photo" placeholder="Url for Product Photo">
+    <select name="category">
+      {% for category in categories %}
+        <option> {{ category.category_name }} </option>
+      {% empty %}
+        <option disabled>No categories available</option>
+      {% endfor %}
+    </select>
+    <input type="submit">
+  </form>
+{% endblock %}
