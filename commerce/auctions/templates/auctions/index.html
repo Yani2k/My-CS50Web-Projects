@@ -5,11 +5,15 @@
     {% for listing in active_listings %}
       <div>
         <h5> Title: {{ listing.title }} </h5>
+        <h5> Category: {{ listing.category.category_name }} </h5>
+        <h5> Description: {{ listing.description }} </h5>
+        <h5> Current Price: {{ listing.minimal_bid }} </h5>
         <h5> Seller: {{ listing.seller.username }} </h5>
+        {% if listing.photo is not None %}
+          <img scr="{{ listing.photo }}" alt="Product Photo">
+        {% endif %}
       </div>
     {% empty %}
       <h3> There are no active listings currently.</h3>
     {% endfor %}
-
-    TODO
 {% endblock %}

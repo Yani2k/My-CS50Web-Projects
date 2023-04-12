@@ -75,7 +75,7 @@ def add(request):
     close_date = request.POST["close_date"]
     photo = request.POST["photo"]
     description = request.POST["description"]
-    category = Listing_Category(category_name=request.POST["category"])
+    category = Listing_Category.objects.get(category_name=request.POST["category"])
     seller = request.user
     new_listing = Listing(seller=seller, category=category, minimal_bid=min_bid, closing_date=close_date, photo=photo, title=title, description=description)
     new_listing.save()
