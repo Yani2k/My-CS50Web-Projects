@@ -3,6 +3,8 @@
 {% block body %}
   <form action="{% url 'add' %}" method="post">
     {% csrf_token %}
+    <input type="text" name="title" placeholder="Title" required>
+    <input type="text" name="description" placeholder="Description" required>
     <input type="number" min="0" name="min_bid" placeholder="Minimal bid allowed" required>
     <input type="date" name="close_date" placeholder="Closing Date" required>
     <input type="url" name="photo" placeholder="Url for Product Photo">

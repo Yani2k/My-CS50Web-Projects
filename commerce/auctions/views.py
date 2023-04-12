@@ -10,7 +10,9 @@ from .models import User, Listing_Category, Listing
 
 
 def index(request):
-    return render(request, "auctions/index.html")
+    return render(request, "auctions/index.html", {
+      "active_listings" : Listing.objects.filter(buyer=None)
+    })
 
 
 def login_view(request):
@@ -68,12 +70,15 @@ def register(request):
 @login_required
 def add(request):
   if request.method == "POST":
+    title = request.POST["title"]
     min_bid = request.POST["min_bid"]
     close_date = request.POST["close_date"]
     photo = request.POST["photo"]
+    description = request.POST["description"]
     category = Listing_Category(category_name=request.POST["category"])
     seller = request.user
-    new_listing = Listing(seller=seller, category=category, minimal_bid=min_bid, closing_date=close_date, photo=photo)
+    new_listing = Listing(seller=seller, category=category, minimal_bid=min_bid, closing_date=close_date, photo=photo, title=title, description=description)
+    new_listing.save()
   return render(request, "auctions/add_listing.html", {
     "categories": Listing_Category.objects.all()
   })
