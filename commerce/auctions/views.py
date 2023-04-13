@@ -82,3 +82,17 @@ def add(request):
   return render(request, "auctions/add_listing.html", {
     "categories": Listing_Category.objects.all()
   })
+  
+  
+def listing(request, listing_id):
+  try:
+    listing = Listing.objects.get(pk=listing_id)
+  except:
+    return render(request, "auctions/error_page.html", {
+      "error_message": "No such listing exists!"
+    })
+    
+  return render(request, "auctions/listing.html", {
+    "listing": listing
+  })
+  

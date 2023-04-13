@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+  <h2 class="title"> {{ listing.title }} </h2>
+  <h3 class="description"> Current Price: {{ listing.minimal_bid }} </h3>
+  <h3 class="description"> Auction Ends On: {{ listing.closing_date }} </h3>
+  {% if listing.photo is not None %}
+    <img class="listing-image" scr="{{ listing.photo }}" alt="Product Photo">
+  {% endif %}
+  <h3 class="description"> {{ listing.category.category_name }} </h3>
+  <h3 class="description"> {{ listing.description }} </h3>
+
+  {% if listing.is_active %}
+  {% endif %}
+
+{% endblock %}

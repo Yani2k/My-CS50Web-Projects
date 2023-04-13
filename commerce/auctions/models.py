@@ -1,8 +1,11 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+import datetime
 
 class User(AbstractUser):
   pass
+  def __str__(self):
+    return self.username
 
 class Listing_Category(models.Model):
   category_name = models.CharField(max_length=64)
@@ -16,6 +19,11 @@ class Listing(models.Model):
   description = models.TextField(default="No description")
   closing_date = models.DateTimeField()
   photo = models.URLField(blank=True, null=True)
+  
+  def is_active(self):
+    if self.closing_date >= datetime.now():
+      return True
+    return False
   
 class Comment(models.Model):
   author = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="comments_by")
